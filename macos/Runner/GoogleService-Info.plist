@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>562652923662-n02a3aj31li3c7ir89srd07ntlei5het.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.562652923662-n02a3aj31li3c7ir89srd07ntlei5het</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD-QL_OSXp7e5-IeHLL7W-lTmUPp2cph3Y</string>
+	<key>GCM_SENDER_ID</key>
+	<string>562652923662</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.libManage</string>
+	<key>PROJECT_ID</key>
+	<string>library-management-62a58</string>
+	<key>STORAGE_BUCKET</key>
+	<string>library-management-62a58.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:562652923662:ios:3556a6121e5a0e1c2af95f</string>
+	<key>DATABASE_URL</key>
+	<string>https://library-management-62a58-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
