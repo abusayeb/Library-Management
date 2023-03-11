@@ -50,6 +50,7 @@ class _teachersState extends State<teachers> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: drawer(context),
       appBar: appbar("Teachers"),
       body: SafeArea(
           child: Padding(
@@ -113,100 +114,102 @@ class _teachersState extends State<teachers> {
           ),
         ),
       )),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 195, 179, 144),
-        onPressed: () async {
-          final result = await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(
-                  'Enter Details',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Name',
-                        labelStyle: TextStyle(
-                          color: Theme.of(context).accentColor,
+      floatingActionButton: isAdmin
+          ? FloatingActionButton(
+              backgroundColor: Color.fromARGB(255, 195, 179, 144),
+              onPressed: () async {
+                final result = await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Enter Details',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      onChanged: (value) {
-                        name = value;
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Post',
-                        labelStyle: TextStyle(
-                          color: Theme.of(context).accentColor,
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Name',
+                              labelStyle: TextStyle(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              name = value;
+                            },
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Post',
+                              labelStyle: TextStyle(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              post = value;
+                            },
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                              labelStyle: TextStyle(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              email = value;
+                            },
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Phone',
+                              labelStyle: TextStyle(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              phn = value;
+                            },
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop(null);
+                          },
                         ),
-                      ),
-                      onChanged: (value) {
-                        post = value;
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                          color: Theme.of(context).accentColor,
+                        TextButton(
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          onPressed: () {
+                            addData_Teacher(name, email, phn, post);
+                            Navigator.of(context).pop(null);
+                          },
                         ),
-                      ),
-                      onChanged: (value) {
-                        email = value;
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Phone',
-                        labelStyle: TextStyle(
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        phn = value;
-                      },
-                    ),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(null);
-                    },
-                  ),
-                  TextButton(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      addData_Teacher(name, email, phn, post);
-                      Navigator.of(context).pop(null);
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
-        tooltip: 'Enter Teachers Details:',
-        child: Icon(Icons.add),
-      ),
+                      ],
+                    );
+                  },
+                );
+              },
+              tooltip: 'Enter Teachers Details:',
+              child: Icon(Icons.add),
+            )
+          : null,
     );
   }
 }

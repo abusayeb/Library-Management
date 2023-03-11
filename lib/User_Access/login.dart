@@ -221,6 +221,9 @@ class _LogInState extends State<LogIn> {
           SharedPreferences pref = await SharedPreferences.getInstance();
           pref.setString('email', email);
           Navigator.pop(context);
+          admin_check(email);
+          print(isAdmin);
+          getCurrentUserData();
           nextScreen(context, HomePage());
         }
       } on FirebaseAuthException catch (e) {

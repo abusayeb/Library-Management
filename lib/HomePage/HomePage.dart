@@ -16,19 +16,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ElevatedButton(
-          onPressed: () async {
-            await _auth.signOut();
-            SharedPreferences pref = await SharedPreferences.getInstance();
-            pref.clear();
-            nextScreen(context, LogIn());
-          },
-          child: Text("LogOut"),
-        ),
-      ),
+      drawer: drawer(context),
       appBar: appbar("Library Management"),
       body: SafeArea(
           child: Padding(
@@ -119,6 +110,16 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )
                     ],
+                  ),
+                  space(25),
+                  Text(
+                    'Abu Sayeb Rayhan\n13th Batch\nDepartment of CSE',
+                    style: GoogleFonts.raleway(
+                      fontSize: 20,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               )),

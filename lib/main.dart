@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_manage/Homepage/Homepage.dart';
 import 'package:lib_manage/User_Access/login.dart';
+import 'package:lib_manage/Welcome/Welcome.dart';
 import 'package:lib_manage/Widgets/widgets.dart';
 import 'package:lib_manage/test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,24 +31,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isLoggedIn = false;
-
-  @override
-  void initState() {
-    super.initState();
-    LogInStatus();
-  }
-
-  Future LogInStatus() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    var str = pref.getString('email');
-    setState(() {
-      if (str != null) {
-        _isLoggedIn = true;
-      }
-    });
-  }
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -55,7 +38,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _isLoggedIn ? HomePage() : LogIn(),
+      // home: _isLoggedIn ? HomePage() : LogIn(),
+      home: WelcomePage(),
     );
   }
 }

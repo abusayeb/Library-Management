@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -81,19 +82,58 @@ Text text(st) {
   );
 }
 
-Drawer drwr(context) {
+String? userName;
+String? userEmail;
+String? userId;
+
+drawer(context) {
+  getCurrentUserData();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   return Drawer(
-    child: ElevatedButton(
-      onPressed: () async {
-        await _auth.signOut();
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.clear();
-        nextScreen(context, LogIn());
-      },
-      child: Text("LogOut"),
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        UserAccountsDrawerHeader(
+          accountName: Text(userName ?? ''),
+          accountEmail: Text(userEmail ?? ''),
+          currentAccountPicture: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Icon(
+              Icons.person,
+              size: 40.0,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Logout'),
+          onTap: () async {
+            await _auth.signOut();
+            SharedPreferences pref = await SharedPreferences.getInstance();
+            pref.clear();
+            nextScreen(context, LogIn());
+          },
+        ),
+      ],
     ),
   );
+}
+
+Future<void> getCurrentUserData() async {
+  final User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    final DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(user.uid)
+            .get();
+    userName = userDoc.data()?['Name'];
+    userEmail = user.email!;
+    userId = userDoc.data()!['Id'];
+    print(userName);
+  }
 }
 
 show_snackbar(String st) {
@@ -138,9 +178,7 @@ Button(context, String st) {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (st == "Teachers")
-            nextScreen(context, teachers());
-          else if (st == "Magazine") nextScreen(context, teachers());
+          if (st == "Teachers") nextScreen(context, teachers());
         },
         child: Ink(
           height: 50,
@@ -206,5 +244,12 @@ Category(String st, context) {
   );
 }
 
+late bool isAdmin = false;
 
-// add new book
+void admin_check(String email) {
+  print(email);
+  if (email == "sayeb.cc.75@gmail.com")
+    isAdmin = true;
+  else
+    isAdmin = false;
+}
